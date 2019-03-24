@@ -81,8 +81,7 @@ class Modal extends Component {
               <Card
                 key={index}
                 width={"100%"}
-                name={card.name}
-                img={card.imageUrl}
+                card={card}
                 button={"Add"}
                 event={e => this.props.addCard(card)}
               />

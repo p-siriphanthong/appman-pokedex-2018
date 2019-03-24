@@ -74,7 +74,7 @@ class App extends Component {
 
   removeCard = removeCard => {
     this.setState({
-      cards: this.state.cards.filter(card => card != removeCard)
+      cards: this.state.cards.filter(card => card !== removeCard)
     });
   };
 
@@ -96,8 +96,7 @@ class App extends Component {
             <Card
               key={index}
               width={"50%"}
-              name={card.name}
-              img={card.imageUrl}
+              card={card}
               button={"X"}
               event={e => this.removeCard(card)}
             />

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import cute from "./cute.png";
 
 const Wrapper = styled.div`
   width: ${props => props.width};
@@ -78,34 +79,67 @@ const LevelTube = styled.div`
 `;
 
 const LevelTubeValue = styled.div`
-  width: 50%;
+  width: ${props => props.width}%;
   height: 30px;
   border-radius: 20px;
   background-color: #f3701a;
 `;
 
+const Cute = styled.div`
+  width: 40px;
+  height: 40px;
+  margin-top: 5px;
+  margin-right: 5px;
+  background-image: url(${cute});
+  background-size: cover;
+  display: inline-block;
+`;
+
 class Card extends Component {
   render() {
+    let hp = this.props.card.hp > 100 ? 100 : 0;
+    let atk =
+      (this.props.card.attacks ? this.props.card.attacks.length : 0) * 50;
+    let weak =
+      (this.props.card.weaknesses ? this.props.card.weaknesses.length : 0) *
+      100;
+    let damage = 0;
+
+    if (this.props.card.attacks) {
+      this.props.card.attacks.forEach(obj => {
+        if (!isNaN(parseInt(obj.damage))) {
+          damage += parseInt(obj.damage);
+        }
+      });
+    }
+
+    let level = Math.floor((hp / 10 + damage / 10 + 10 - weak / 100) / 5);
+    let cutes = [];
+    for (let i = 0; i < level; i++) {
+      cutes.push(<Cute key={i} />);
+    }
+
     return (
       <Wrapper width={this.props.width}>
         <CardWrapper>
-          <Img src={this.props.img} />
+          <Img src={this.props.card.imageUrl} />
           <Content>
-            <Name>{this.props.name}</Name>
+            <Name>{this.props.card.name}</Name>
             <LevelWrapper>
               <LevelName>HP</LevelName>
               <LevelTube>
-                <LevelTubeValue />
+                <LevelTubeValue width={hp} />
               </LevelTube>
               <LevelName>STR</LevelName>
               <LevelTube>
-                <LevelTubeValue />
+                <LevelTubeValue width={atk} />
               </LevelTube>
               <LevelName>WEAK</LevelName>
               <LevelTube>
-                <LevelTubeValue />
+                <LevelTubeValue width={weak} />
               </LevelTube>
             </LevelWrapper>
+            {cutes}
           </Content>
           <Button onClick={this.props.event}>{this.props.button}</Button>
         </CardWrapper>
