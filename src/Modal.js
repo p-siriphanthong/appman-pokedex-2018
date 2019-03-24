@@ -93,7 +93,9 @@ class Modal extends Component {
           </SearchWrapper>
           <Content>
             {this.state.cards.map((card, index) =>
-              !this.props.currentCards.includes(card) ? (
+              !this.props.currentCards.find(
+                element => element.id === card.id
+              ) ? (
                 <Card
                   key={index}
                   width={"100%"}

@@ -107,8 +107,8 @@ class Card extends Component {
 
     if (this.props.card.attacks) {
       this.props.card.attacks.forEach(obj => {
-        if (!isNaN(parseInt(obj.damage))) {
-          damage += parseInt(obj.damage);
+        if (!isNaN(parseInt(obj.damage, 10))) {
+          damage += parseInt(obj.damage, 10);
         }
       });
     }
