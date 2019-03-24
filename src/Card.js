@@ -52,7 +52,36 @@ const Content = styled.div`
 
 const Name = styled.h1`
   font-family: "Gaegu";
-  margin-top: 0;
+  margin: 0;
+  margin-bottom: 10px;
+`;
+
+const LevelWrapper = styled.div`
+  max-width: 450px;
+`;
+
+const LevelName = styled.p`
+  font-size: 1.2em;
+  font-weight: 500;
+  vertical-align: top;
+  margin: 0;
+  width: 25%;
+  display: inline-block;
+`;
+
+const LevelTube = styled.div`
+  width: 75%;
+  height: 30px;
+  background-color: #e4e4e4;
+  border-radius: 20px;
+  display: inline-block;
+`;
+
+const LevelTubeValue = styled.div`
+  width: 50%;
+  height: 30px;
+  border-radius: 20px;
+  background-color: #f3701a;
 `;
 
 class Card extends Component {
@@ -63,6 +92,20 @@ class Card extends Component {
           <Img src={this.props.img} />
           <Content>
             <Name>{this.props.name}</Name>
+            <LevelWrapper>
+              <LevelName>HP</LevelName>
+              <LevelTube>
+                <LevelTubeValue />
+              </LevelTube>
+              <LevelName>STR</LevelName>
+              <LevelTube>
+                <LevelTubeValue />
+              </LevelTube>
+              <LevelName>WEAK</LevelName>
+              <LevelTube>
+                <LevelTubeValue />
+              </LevelTube>
+            </LevelWrapper>
           </Content>
           <Button onClick={this.props.event}>{this.props.button}</Button>
         </CardWrapper>
