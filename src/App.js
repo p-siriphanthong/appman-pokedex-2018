@@ -31,9 +31,11 @@ const Header = styled.div`
 `;
 
 const Content = styled.div`
+  padding-bottom: 50px;
   height: calc(768px - 95px - 100px);
   background-color: white;
   overflow-y: scroll;
+  box-sizing: border-box;
 `;
 
 const Footer = styled.div`
