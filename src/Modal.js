@@ -21,7 +21,6 @@ const ModalWrapper = styled.div`
   height: 700px;
   padding: 15px;
   box-sizing: border-box;
-  overflow-y: scroll;
 `;
 
 const SearchWrapper = styled.div`
@@ -51,6 +50,11 @@ const SearchIcon = styled.div`
   right: 5px;
 `;
 
+const Content = styled.div`
+  height: calc(100% - 74px);
+  overflow-y: scroll;
+`;
+
 class Modal extends Component {
   constructor(props) {
     super(props);
@@ -76,19 +80,21 @@ class Modal extends Component {
             <Search />
             <SearchIcon />
           </SearchWrapper>
-          {this.state.cards.map((card, index) =>
-            this.props.currentCards.indexOf(card) === -1 ? (
-              <Card
-                key={index}
-                width={"100%"}
-                card={card}
-                button={"Add"}
-                event={e => this.props.addCard(card)}
-              />
-            ) : (
-              ""
-            )
-          )}
+          <Content>
+            {this.state.cards.map((card, index) =>
+              !this.props.currentCards.includes(card) ? (
+                <Card
+                  key={index}
+                  width={"100%"}
+                  card={card}
+                  button={"Add"}
+                  event={e => this.props.addCard(card)}
+                />
+              ) : (
+                ""
+              )
+            )}
+          </Content>
         </ModalWrapper>
       </Wrapper>
     );
