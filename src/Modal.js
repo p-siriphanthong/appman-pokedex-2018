@@ -61,7 +61,7 @@ class Modal extends Component {
     this.state = { cards: [] };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     axios
       .get("http://localhost:3030/api/cards")
       .then(res => {
@@ -70,14 +70,25 @@ class Modal extends Component {
       .catch(error => {
         console.log(error);
       });
-  }
+  };
+
+  filterCard = event => {
+    axios
+      .get("http://localhost:3030/api/cards?name=" + event.target.value)
+      .then(res => {
+        this.setState({ cards: res.data.cards });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   render() {
     return (
       <Wrapper onClick={this.props.onClick}>
         <ModalWrapper onClick={e => e.stopPropagation()}>
           <SearchWrapper>
-            <Search />
+            <Search onChange={this.filterCard} />
             <SearchIcon />
           </SearchWrapper>
           <Content>
