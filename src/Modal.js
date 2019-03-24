@@ -76,16 +76,20 @@ class Modal extends Component {
             <Search />
             <SearchIcon />
           </SearchWrapper>
-          {this.state.cards.map((card, index) => (
-            <Card
-              key={index}
-              width={"100%"}
-              name={card.name}
-              img={card.imageUrl}
-              button={"Add"}
-              event={e => this.props.addCard(card)}
-            />
-          ))}
+          {this.state.cards.map((card, index) =>
+            this.props.currentCards.indexOf(card) === -1 ? (
+              <Card
+                key={index}
+                width={"100%"}
+                name={card.name}
+                img={card.imageUrl}
+                button={"Add"}
+                event={e => this.props.addCard(card)}
+              />
+            ) : (
+              ""
+            )
+          )}
         </ModalWrapper>
       </Wrapper>
     );

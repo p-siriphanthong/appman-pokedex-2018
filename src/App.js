@@ -68,19 +68,25 @@ class App extends Component {
     this.setState({ modal: !this.state.modal });
   };
 
-  addCard = card => {
-    this.setState({ cards: [...this.state.cards, card] });
+  addCard = newCard => {
+    this.setState({ cards: [...this.state.cards, newCard] });
   };
 
-  removeCard = card => {
-    // this.setState({ cards: [...this.state.cards, card] });
+  removeCard = removeCard => {
+    this.setState({
+      cards: this.state.cards.filter(card => card != removeCard)
+    });
   };
 
   render() {
     return (
       <Wrapper>
         {this.state.modal ? (
-          <Modal onClick={this.toggleModal} addCard={this.addCard} />
+          <Modal
+            onClick={this.toggleModal}
+            addCard={this.addCard}
+            currentCards={this.state.cards}
+          />
         ) : (
           ""
         )}
@@ -93,7 +99,7 @@ class App extends Component {
               name={card.name}
               img={card.imageUrl}
               button={"X"}
-              event={e => this.props.removeCard(card)}
+              event={e => this.removeCard(card)}
             />
           ))}
         </Content>
