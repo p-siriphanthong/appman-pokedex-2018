@@ -16,10 +16,12 @@ const Wrapper = styled.div`
 
 const ModalWrapper = styled.div`
   background-color: white;
+  border-radius: 5px;
   margin: 34px auto 0;
   width: 900px;
   height: 700px;
   padding: 15px;
+  box-shadow: 0 0 5px #474444;
   box-sizing: border-box;
 `;
 
